@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Checkout Confirmation | Mastering Interest Rate Derivatives</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cookie-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/IRD_favicon.png">
+    <style>
+        .pre-checkout-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--light-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .pre-checkout-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .pre-checkout-header h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .pre-checkout-header p {
+            font-size: 1.1rem;
+            color: var(--light-text);
+        }
+        
+        .course-summary {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+        }
+        
+        .course-image {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .course-details {
+            flex: 1;
+        }
+        
+        .course-details h2 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        
+        .course-details p {
+            margin: 0;
+            color: var(--light-text);
+        }
+        
+        .price-details {
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .price-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding-top: 15px;
+        }
+        
+        .price-row .label {
+            color: var(--text-color);
+        }
+        
+        .price-row .value {
+            color: var(--primary-color);
+        }
+        
+        .vat-note {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .withdrawal-notice {
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .withdrawal-notice h3 {
+            margin-top: 0;
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+        
+        .withdrawal-notice p {
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+        
+        .terms-agreement {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .terms-agreement input {
+            margin-top: 5px;
+        }
+        
+        .terms-agreement label {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .terms-agreement a {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        
+        .checkout-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6b7280;
+            text-decoration: none;
+        }
+        
+        .back-button:hover {
+            color: #1f2937;
+            text-decoration: underline;
+        }
+        
+        .checkout-button {
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 2;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .checkout-button:hover {
+            background-color: #e89806;
+        }
+        
+        .checkout-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 768px) {
+            .pre-checkout-container {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            .course-summary {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .checkout-actions {
+                flex-direction: column;
+            }
+            
+            .back-button, .checkout-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>IR<span>Derivatives</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#curriculum">Curriculum</a></li>
+                    <li><a href="index.html#instructor">Instructor</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                    <li><a href="index.html#pricing" class="nav-cta">Enroll Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="pre-checkout-container">
+        <div class="pre-checkout-header">
+            <h1>Pre-Checkout Confirmation</h1>
+            <p>Please review your order details before proceeding to Udemy</p>
+        </div>
+        
+        <div class="course-summary">
+            <div class="course-image">
+                <img src="images/ficc_trading_floor.png" alt="Interest Rate Derivatives Course">
+            </div>
+            <div class="course-details">
+                <h2>Mastering Interest Rate Derivatives</h2>
+                <p>The Definitive Course for Finance Professionals</p>
+            </div>
+        </div>
+        
+        <div class="price-details">
+            <div class="price-row">
+                <div class="label">Course Price</div>
+                <div class="value">$199.99</div>
+            </div>
+            <div class="price-row">
+                <div class="label">Discount (25%)</div>
+                <div class="value">-$50.00</div>
+            </div>
+            <div class="price-row">
+                <div class="label">Subtotal</div>
+                <div class="value">$149.99</div>
+            </div>
+            <div class="price-row">
+                <div class="label">VAT (may vary by country)</div>
+                <div class="value">Calculated at checkout</div>
+            </div>
+            <div class="price-row">
+                <div class="label">Total</div>
+                <div class="value">$149.99 + applicable VAT</div>
+            </div>
+            <p class="vat-note">* VAT rates vary by country and will be calculated based on your location during the final checkout on Udemy.</p>
+        </div>
+        
+        <div class="withdrawal-notice">
+            <h3>14-Day Right of Withdrawal</h3>
+            <p>In accordance with EU consumer protection laws, you have the right to withdraw from this purchase within 14 days of enrollment without giving any reason. This cooling-off period begins from the day you complete your purchase. Please note that if you access the course content during this period, you acknowledge that you will lose your right of withdrawal as the service has begun.</p>
+            <p>For more details on the withdrawal process, please refer to our <a href="terms-of-service.html">Terms of Service</a>.</p>
+        </div>
+        
+        <div class="terms-agreement">
+            <input type="checkbox" id="terms-checkbox">
+            <label for="terms-checkbox">I have read and agree to the <a href="terms-of-service.html">Terms of Service</a>, <a href="privacy-policy.html">Privacy Policy</a>, and acknowledge the 14-day right of withdrawal.</label>
+        </div>
+        
+        <div class="checkout-actions">
+            <a href="index.html" class="back-button">Back to Course</a>
+            <a href="#" id="checkout-button" class="checkout-button" disabled>Proceed to Udemy Checkout</a>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="script.js"></script>
+    <script src="analytics.js"></script>
+    <script src="cookie-consent.js"></script>
+    <script src="footer.js"></script>
+    <script>
+        // Pre-checkout functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const termsCheckbox = document.getElementById('terms-checkbox');
+            const checkoutButton = document.getElementById('checkout-button');
+            const udemy_url = "https://www.udemy.com/course/mastering-interest-rate-derivatives/?couponCode=IRDERIVS25_1";
+            
+            // Enable/disable checkout button based on checkbox
+            termsCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    checkoutButton.removeAttribute('disabled');
+                    checkoutButton.style.opacity = '1';
+                } else {
+                    checkoutButton.setAttribute('disabled', 'disabled');
+                    checkoutButton.style.opacity = '0.5';
+                }
+            });
+            
+            // Set initial state
+            checkoutButton.style.opacity = '0.5';
+            
+            // Handle checkout button click
+            checkoutButton.addEventListener('click', function(e) {
+                if (!termsCheckbox.checked) {
+                    e.preventDefault();
+                    alert('Please agree to the terms before proceeding.');
+                    return false;
+                }
+                
+                // Track checkout event if analytics is available
+                if (window.MIRDAnalytics && typeof window.MIRDAnalytics.trackEvent === 'function') {
+                    window.MIRDAnalytics.trackEvent('Conversion', 'Checkout', 'Udemy Redirect');
+                }
+                
+                // Redirect to Udemy
+                window.location.href = udemy_url;
+            });
+        });
+    </script>
+</body>
+</html>
