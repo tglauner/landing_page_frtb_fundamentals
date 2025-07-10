@@ -16,24 +16,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
         // Update all countdown displays
-        document.getElementById('days').textContent = days;
-        document.getElementById('hours').textContent = hours;
-        document.getElementById('minutes').textContent = minutes;
-        document.getElementById('seconds').textContent = seconds;
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
         
-        document.getElementById('days-offer').textContent = days;
-        document.getElementById('hours-offer').textContent = hours;
-        document.getElementById('minutes-offer').textContent = minutes;
-        document.getElementById('seconds-offer').textContent = seconds;
-        
-        document.getElementById('final-timer').textContent = `${days} days, ${hours} hours, ${minutes} minutes`;
+        document.getElementById("final-timer").textContent = `${days} days, ${hours} hours, ${minutes} minutes`;
         
         // If countdown is finished
         if (distance < 0) {
             clearInterval(countdownInterval);
-            document.getElementById('countdown').innerHTML = "EXPIRED";
-            document.getElementById('countdown-offer').innerHTML = "EXPIRED";
-            document.getElementById('final-timer').textContent = "EXPIRED";
+            document.getElementById("countdown").innerHTML = "EXPIRED";
         }
     }
     

@@ -973,3 +973,14 @@ footer {
         font-size: 1rem;
     }
 }
+
+
+.guarantee-text {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.5rem; /* Increased font size */
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+}
+

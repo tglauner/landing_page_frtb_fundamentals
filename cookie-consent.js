@@ -26,8 +26,22 @@ const MIRDCookieConsent = (function() {
         
         // If no consent has been given yet, show the banner
         if (!currentConsent.accepted) {
-            showConsentBanner();
+            const banner = document.getElementById("cookie-consent");
+            if (banner) {
+                banner.style.display = "flex"; // Show the banner
+            }
         }
+        
+        // Add event listeners to buttons
+        document.getElementById("accept-cookies").addEventListener("click", () => {
+            acceptAllCookies();
+            hideBanner();
+        });
+        
+        document.getElementById("decline-cookies").addEventListener("click", () => {
+            acceptEssentialCookies();
+            hideBanner();
+        });
         
         // Add event listener for preference button in footer
         addPreferenceButtonListener();
@@ -37,72 +51,30 @@ const MIRDCookieConsent = (function() {
      * Check for existing consent in localStorage
      */
     function checkExistingConsent() {
-        const storedConsent = localStorage.getItem('mird_consent');
+        const storedConsent = localStorage.getItem("mird_consent");
         if (storedConsent) {
             try {
                 currentConsent = JSON.parse(storedConsent);
+                if (currentConsent.accepted) {
+                    const banner = document.getElementById("cookie-consent");
+                    if (banner) {
+                        banner.style.display = "none"; // Hide if already accepted
+                    }
+                }
             } catch (e) {
-                console.error('Error parsing stored consent:', e);
+                console.error("Error parsing stored consent:", e);
                 currentConsent = {...defaultConsent};
             }
         }
     }
     
     /**
-     * Show the cookie consent banner
-     */
-    function showConsentBanner() {
-        // Create banner element
-        const banner = document.createElement('div');
-        banner.id = 'cookie-consent-banner';
-        banner.className = 'cookie-consent-banner';
-        
-        // Set banner content
-        banner.innerHTML = `
-            <div class="consent-content">
-                <div class="consent-text">
-                    <h3>Cookie Consent</h3>
-                    <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. 
-                    By clicking "Accept All", you consent to our use of cookies. Visit our 
-                    <a href="cookie-policy.html">Cookie Policy</a> to learn more.</p>
-                </div>
-                <div class="consent-buttons">
-                    <button id="consent-accept-all" class="consent-button accept">Accept All</button>
-                    <button id="consent-accept-essential" class="consent-button essential">Essential Only</button>
-                    <button id="consent-customize" class="consent-button customize">Customize</button>
-                </div>
-            </div>
-        `;
-        
-        // Add banner to page
-        document.body.appendChild(banner);
-        
-        // Add event listeners to buttons
-        document.getElementById('consent-accept-all').addEventListener('click', () => {
-            acceptAllCookies();
-            hideBanner();
-        });
-        
-        document.getElementById('consent-accept-essential').addEventListener('click', () => {
-            acceptEssentialCookies();
-            hideBanner();
-        });
-        
-        document.getElementById('consent-customize').addEventListener('click', () => {
-            showPreferencesModal();
-        });
-    }
-    
-    /**
      * Hide the consent banner
      */
     function hideBanner() {
-        const banner = document.getElementById('cookie-consent-banner');
+        const banner = document.getElementById("cookie-consent");
         if (banner) {
-            banner.classList.add('hidden');
-            setTimeout(() => {
-                banner.remove();
-            }, 500);
+            banner.style.display = "none";
         }
     }
     

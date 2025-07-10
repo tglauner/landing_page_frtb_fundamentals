@@ -1,7 +1,7 @@
 /* Cookie Consent Banner and Modal Styles */
 
 /* Banner Styles */
-.cookie-consent-banner {
+.cookie-consent {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -14,12 +14,12 @@
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.cookie-consent-banner.hidden {
+.cookie-consent.hidden {
     transform: translateY(100%);
     opacity: 0;
 }
 
-.consent-content {
+.cookie-content {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -29,34 +29,26 @@
     gap: 20px;
 }
 
-.consent-text {
+.cookie-content p {
     flex: 1;
     min-width: 300px;
-}
-
-.consent-text h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.2rem;
-}
-
-.consent-text p {
     margin: 0;
     font-size: 0.9rem;
     line-height: 1.5;
 }
 
-.consent-text a {
+.cookie-content a {
     color: var(--accent-color);
     text-decoration: underline;
 }
 
-.consent-buttons {
+.cookie-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-.consent-button {
+.cookie-btn {
     padding: 8px 16px;
     border: none;
     border-radius: var(--border-radius);
@@ -66,33 +58,23 @@
     font-size: 0.9rem;
 }
 
-.consent-button.accept {
+.cookie-btn.accept {
     background-color: var(--accent-color);
     color: white;
 }
 
-.consent-button.accept:hover {
+.cookie-btn.accept:hover {
     background-color: #e89806;
 }
 
-.consent-button.essential {
+.cookie-btn.decline {
     background-color: transparent;
     border: 1px solid white;
     color: white;
 }
 
-.consent-button.essential:hover {
+.cookie-btn.decline:hover {
     background-color: rgba(255, 255, 255, 0.1);
-}
-
-.consent-button.customize {
-    background-color: transparent;
-    color: white;
-    text-decoration: underline;
-}
-
-.consent-button.customize:hover {
-    color: var(--accent-color);
 }
 
 /* Preferences Modal Styles */
