@@ -21,7 +21,7 @@ const EURedirect = (function() {
     ];
     
     // Default Udemy URL with coupon
-    const udemyURL = "https://www.udemy.com/course/mastering-interest-rate-derivatives/?couponCode=IRDERIVS25_1";
+    const udemyURL = "https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25";
     
     /**
      * Check if the user is in the EU based on their IP address
