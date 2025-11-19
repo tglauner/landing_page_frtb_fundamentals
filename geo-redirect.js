@@ -21,7 +21,7 @@ const EURedirect = (function() {
     ];
     
     // Default Udemy URL with coupon
-    const udemyURL = "https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_OCT_2025";
+    const udemyURL = "https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_NOV_2025";
     
     /**
      * Check if the user is in the EU based on their IP address
