@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FRTB Fundamentals | Comprehensive Training for Banking Professionals</title>
-    <meta name="description" content="Master the Fundamental Review of the Trading Book (FRTB) with comprehensive training on market risk capital rules, standardized approach, and internal models from industry experts.">
+    <meta name="description" content="Master FRTB: SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons. Bank-grade examples with Excel and Python.">
     <meta name="keywords" content="FRTB, fundamental review trading book, market risk, Basel III, banking regulation, capital requirements, standardized approach, internal models">
-    <meta name="description" content="Master FRTB: SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons. Bank-grade examples with Excel & Python to apply on the job fast.">
+    <meta name="author" content="Tim Glauner">
+    <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+    <link rel="canonical" href="https://tglauner.com/frtb_fundamentals/">
+    <link rel="alternate" hreflang="en" href="https://tglauner.com/frtb_fundamentals/">
+    <meta property="og:title" content="FRTB Fundamentals | Basel III Market Risk Course">
+    <meta property="og:description" content="Master FRTB: SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons. Bank-grade examples with Excel and Python.">
+    <meta property="og:url" content="https://tglauner.com/frtb_fundamentals/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TG Investments and Research">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://tglauner.com/frtb_fundamentals/images/frtb_skyline.jpg">
+    <meta property="og:image:alt" content="Financial district skyline for FRTB Fundamentals">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FRTB Fundamentals | Basel III Market Risk Course">
+    <meta name="twitter:description" content="Master FRTB: SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons. Bank-grade examples with Excel and Python.">
+    <meta name="twitter:image" content="https://tglauner.com/frtb_fundamentals/images/frtb_skyline.jpg">
+    <meta name="twitter:image:alt" content="Financial district skyline for FRTB Fundamentals">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="cookie-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -14,12 +30,123 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/FRTB_favicon.png">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Organization",
+                    "@id": "https://tglauner.com/#organization",
+                    "name": "TG Investments and Research, LLC",
+                    "url": "https://tglauner.com/",
+                    "logo": "https://tglauner.com/assets/favicon.png"
+                },
+                {
+                    "@type": "Person",
+                    "@id": "https://tglauner.com/#tim-glauner",
+                    "name": "Tim Glauner",
+                    "jobTitle": "Founder and Instructor",
+                    "affiliation": {
+                        "@id": "https://tglauner.com/#organization"
+                    }
+                },
+                {
+                    "@type": "Course",
+                    "@id": "https://tglauner.com/frtb_fundamentals/#course",
+                    "name": "FRTB Fundamentals",
+                    "description": "Master FRTB: SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons. Bank-grade examples with Excel and Python.",
+                    "url": "https://tglauner.com/frtb_fundamentals/",
+                    "image": "https://tglauner.com/frtb_fundamentals/images/frtb_skyline.jpg",
+                    "inLanguage": "en",
+                    "educationalLevel": "Professional",
+                    "courseMode": "online",
+                    "provider": {
+                        "@id": "https://tglauner.com/#organization"
+                    },
+                    "instructor": {
+                        "@id": "https://tglauner.com/#tim-glauner"
+                    },
+                    "offers": {
+                        "@type": "Offer",
+                        "url": "https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_JAN_2026",
+                        "price": "149.99",
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/InStock"
+                    }
+                },
+                {
+                    "@type": "BreadcrumbList",
+                    "@id": "https://tglauner.com/frtb_fundamentals/#breadcrumbs",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Home",
+                            "item": "https://tglauner.com/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "FRTB Fundamentals",
+                            "item": "https://tglauner.com/frtb_fundamentals/"
+                        }
+                    ]
+                },
+                {
+                    "@type": "FAQPage",
+                    "@id": "https://tglauner.com/frtb_fundamentals/#faq",
+                    "mainEntity": [
+                        {
+                            "@type": "Question",
+                            "name": "What background knowledge is required for this course?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Basic understanding of banking operations and market risk concepts is helpful but not required. The course starts with fundamentals and builds up to advanced topics."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "How long do I have access to the course materials?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "You have lifetime access to all course materials, including any future updates and additional content that may be added."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "Does the course cover both Standardized Approach and Internal Models Approach?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes, the course provides comprehensive coverage of both SA and IMA, including detailed explanations, calculations, and practical implementation guidance."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "Are there practical examples and case studies included?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Absolutely. The course includes numerous practical examples, sample calculations, and real-world case studies to illustrate key concepts and implementation challenges."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "Is this course suitable for consultants working with multiple banks?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes, the course is designed to provide comprehensive knowledge that consultants can apply across different institutions and FRTB implementation projects."
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    </script>
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <h1>FRTB<span>Fundamentals</span></h1>
+                <div class="logo-text">FRTB<span>Fundamentals</span></div>
             </div>
             <nav>
                 <ul>
@@ -562,4 +689,3 @@
     <script src="/js/tracking.js" defer></script>
 </body>
 </html>
-

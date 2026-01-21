@@ -89,9 +89,10 @@ header .container {
     align-items: center;
 }
 
-.logo h1 {
+.logo .logo-text {
     font-size: 1.8rem;
-    margin-bottom: 0;
+    font-weight: 700;
+    margin: 0;
 }
 
 .logo span {
@@ -983,4 +984,3 @@ footer {
     display: block;
     margin-top: 15px;
 }
-
