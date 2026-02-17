@@ -61,15 +61,6 @@ const EURedirect = (function() {
             // Check if the visitor is from the EU
             const isEU = await isEUVisitor();
             
-            // Track the click event if analytics is available
-            if (window.MIRDAnalytics && typeof window.MIRDAnalytics.trackEvent === 'function') {
-                window.MIRDAnalytics.trackEvent(
-                    'Conversion', 
-                    'Enroll Click', 
-                    isEU ? 'EU Visitor - Pre-checkout' : 'Non-EU Visitor - Direct'
-                );
-            }
-            
             // Redirect based on location
             if (isEU) {
                 // EU visitors see the pre-checkout page

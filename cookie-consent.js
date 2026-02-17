@@ -198,7 +198,6 @@ const MIRDCookieConsent = (function() {
         };
         
         saveConsent();
-        updateAnalyticsConsent();
     }
     
     /**
@@ -214,7 +213,6 @@ const MIRDCookieConsent = (function() {
         };
         
         saveConsent();
-        updateAnalyticsConsent();
     }
     
     /**
@@ -230,7 +228,6 @@ const MIRDCookieConsent = (function() {
         };
         
         saveConsent();
-        updateAnalyticsConsent();
     }
     
     /**
@@ -238,16 +235,6 @@ const MIRDCookieConsent = (function() {
      */
     function saveConsent() {
         localStorage.setItem('mird_consent', JSON.stringify(currentConsent));
-    }
-    
-    /**
-     * Update analytics consent
-     */
-    function updateAnalyticsConsent() {
-        // If MIRDAnalytics exists, update consent
-        if (window.MIRDAnalytics && typeof window.MIRDAnalytics.updateConsent === 'function') {
-            window.MIRDAnalytics.updateConsent(currentConsent.analytics);
-        }
     }
     
     /**
