@@ -1,8 +1,8 @@
-# Interest Rate Derivatives Course Landing Page Documentation
+# FRTB Fundamentals Landing Page Documentation
 
 ## Project Overview
 
-This document provides an overview of the high-conversion landing page created for the "Mastering Interest Rate Derivatives" course. The landing page is designed to maximize conversions with a strategic 25% discount coupon implementation.
+This document provides an overview of the high-conversion landing page created for the "FRTB Fundamentals" course. The landing page is designed to maximize conversions with a strategic 25% discount coupon implementation.
 
 ## Key Features
 
@@ -14,9 +14,9 @@ This document provides an overview of the high-conversion landing page created f
    - Emphasis on practical skills and career advancement
 
 2. **Strategic Discount Implementation**
-   - 25% discount prominently displayed ($199 → $149.25)
+   - 25% discount prominently displayed ($199 → $149.99)
    - Countdown timer creating urgency (3-day limited offer)
-   - Exclusive coupon code (IRDERIVS25_FEB_2026) with copy functionality
+   - Exclusive coupon code (FRTB25_FEB_2026) with copy functionality
    - Limited seats indicator to enhance scarcity
 
 3. **Social Proof**
@@ -86,4 +86,4 @@ The landing page is built as a static website with:
 
 ## Conclusion
 
-This landing page implements best practices for high-conversion design with a specific focus on the interest rate derivatives audience. The strategic discount implementation, combined with strong social proof and clear value proposition, creates an effective conversion funnel for your course.
+This landing page implements best practices for high-conversion design with a specific focus on banking and market risk professionals. The strategic discount implementation, combined with strong social proof and clear value proposition, creates an effective conversion funnel for your course.

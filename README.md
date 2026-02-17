@@ -1,2 +1,2 @@
-# landing_page_mastering_interest_rate_derivatives
-web site code for Mastering Interest Rate Derivatives course
+# landing_page_frtb_fundamentals
+web site code for FRTB Fundamentals course

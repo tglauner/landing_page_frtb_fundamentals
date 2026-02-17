@@ -1,4 +1,4 @@
-# Landing Page Project for Interest Rate Derivatives Course
+# Landing Page Project for FRTB Fundamentals Course
 
 ## Research and Analysis
 - [x] Analyze Udemy course page to understand content and value proposition

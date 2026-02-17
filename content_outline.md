@@ -1,12 +1,12 @@
 # Landing Page Content Outline
 
 ## Hero Section
-- **Headline:** "Master Interest Rate Derivatives: The Definitive Course for Finance Professionals"
-- **Subheadline:** "Comprehensive training on swaps, curves, caps, floors, and swaptions from industry experts"
+- **Headline:** "Master FRTB Fundamentals: The Definitive Course for Banking Professionals"
+- **Subheadline:** "Comprehensive training on SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons"
 - **Hero Image:** Professional image showing financial markets/trading floor
 - **Primary CTA:** "Enroll Now - 25% OFF" with countdown timer
-- **Social Proof:** "4.8/5 rating from 25+ finance professionals"
-- **Price Display:** "$199" (strikethrough) → "$149.25" (with coupon)
+- **Social Proof:** "4.8/5 rating from 30+ banking professionals"
+- **Price Display:** "$199" (strikethrough) → "$149.99" (with coupon)
 
 ## Instructor Introduction
 - Professional headshot of Tim Glauner
@@ -17,26 +17,24 @@
 ## Value Proposition Section
 - **Headline:** "Why This Course Will Advance Your Finance Career"
 - 3-4 key benefits with icons:
-  1. Practical skills directly applicable to trading floors and treasury departments
-  2. End-to-end workflow experience for pricing interest rate swaps
-  3. Deep understanding of complex derivatives valued by employers
-  4. Competitive advantage in the job market
+  1. Practical skills directly applicable to trading desks and risk teams
+  2. End-to-end workflow understanding for FRTB implementation
+  3. Deep understanding of SA and IMA requirements valued by employers
+  4. Competitive advantage in market risk and regulatory roles
 
 ## Course Content Preview
-- **Headline:** "Comprehensive Curriculum Covering All Aspects of Interest Rate Derivatives"
+- **Headline:** "Comprehensive Curriculum Covering All Aspects of FRTB"
 - Module breakdown with expandable sections:
-  1. Interest Rate Fundamentals
-  2. Interest Rate Financial Instruments and Derivatives
-  3. Valuation of Swaps & Swap Use Cases
-  4. End-to-End Workflow to Price an Interest Rate Swap
-  5. Building Interest Rate Curves
-  6. Cap and Floor Pricing
-  7. Swaptions
-  8. Swap Real-World Use Cases
-  9. FX Concepts and IR Parity
-  10. Collateral Management
-  11. The Federal Reserve System & FHLBs
-  12. Capital Markets Functional Areas
+  1. FRTB Foundations and Regulatory Context
+  2. Standardized Approach (SA) Framework
+  3. Internal Models Approach (IMA) Fundamentals
+  4. Expected Shortfall and Liquidity Horizons
+  5. Risk Factor Eligibility Test (RFET) and NMRF
+  6. Profit and Loss Attribution (PLA)
+  7. Backtesting and Model Validation
+  8. Desk Structure and Model Approval Governance
+  9. Data, Systems, and Reporting Architecture
+  10. Capital Impact Analysis and Management Actions
 - Sample video or lesson preview
 - Secondary CTA button
 
@@ -45,7 +43,7 @@
 - Persona cards for each audience segment:
   1. Junior Analysts seeking career advancement
   2. Finance Students complementing academic learning
-  3. Senior Analysts specializing in derivatives
+  3. Senior Analysts specializing in market risk
   4. Finance Executives making strategic decisions
   5. Engineering Professionals entering finance
 
@@ -59,8 +57,8 @@
 - **Headline:** "Special Limited-Time Offer"
 - Discount details: "25% OFF - Only for the next [countdown timer]"
 - Original price ($199) with strikethrough
-- Discounted price ($149.25) highlighted
-- Exclusive coupon code: "IRDERIVS25_FEB_2026"
+- Discounted price ($149.99) highlighted
+- Exclusive coupon code: "FRTB25_FEB_2026"
 - Urgency messaging: "Limited seats available at this price"
 - Primary CTA button
 
@@ -79,7 +77,7 @@
 - Trust indicators
 
 ## Final Call-to-Action
-- **Headline:** "Ready to Master Interest Rate Derivatives?"
+- **Headline:** "Ready to Master FRTB Fundamentals?"
 - Recap of key benefits
 - Final CTA button: "Enroll Now with 25% Discount"
 - Reminder of limited-time offer

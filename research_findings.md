@@ -2,7 +2,7 @@
 
 ## Key Elements for High-Converting Course Landing Pages
 
-Based on research from Unbounce, eLearning Industry, and other authoritative sources, these are the essential elements for a high-converting landing page for an interest rate derivatives course:
+Based on research from Unbounce, eLearning Industry, and other authoritative sources, these are the essential elements for a high-converting landing page for an FRTB market risk course:
 
 ### 1. Strong Instructor Bio and Credibility
 - Highlight instructor's experience and credentials prominently
@@ -11,7 +11,7 @@ Based on research from Unbounce, eLearning Industry, and other authoritative sou
 
 ### 2. Clear Value Proposition
 - Communicate the unique benefits of the course within 5 seconds of landing
-- Focus on career advancement and practical skills in interest rate derivatives
+- Focus on career advancement and practical skills in market risk and banking regulation
 - Address pain points of target audience (finance professionals, students, analysts)
 
 ### 3. Course Content Preview
@@ -90,7 +90,7 @@ Research from Voucherify, Shopify, and course marketing experts suggests these s
 
 ### 7. Personalized Coupon Codes
 - Create coupon codes that feel personalized to the finance industry
-- Use finance-related terms in the coupon code (e.g., "IRDERIVS25_FEB_2026")
+- Use finance-related terms in the coupon code (e.g., "FRTB25_FEB_2026")
 - Make codes easy to remember and type
 
 ### 8. Clear Terms and Conditions
@@ -104,7 +104,7 @@ Based on the Udemy course description, these are the primary audience segments t
 
 1. **Junior Finance Analysts** - Looking to deepen knowledge and advance careers
 2. **Finance Students** - Seeking practical skills to complement academic learning
-3. **Senior Analysts** - Wanting specialized knowledge in interest rate derivatives
+3. **Senior Analysts** - Wanting specialized knowledge in FRTB and market risk
 4. **Finance Executives** - Needing comprehensive understanding for decision-making
 5. **Engineering Professionals** - Interested in financial applications of technical skills
 

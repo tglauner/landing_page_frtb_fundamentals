@@ -1,10 +1,13 @@
 /**
- * MIRD Cookie Consent Manager
+ * FRTB Cookie Consent Manager
  * Version: 1.0.0
  * Last Updated: May 28, 2025
  */
 
-const MIRDCookieConsent = (function() {
+const FRTBCookieConsent = (function() {
+    const CONSENT_KEY = 'frtb_consent';
+    const LEGACY_CONSENT_KEY = 'mird_consent';
+
     // Default consent settings
     const defaultConsent = {
         essential: true,  // Always required
@@ -33,15 +36,21 @@ const MIRDCookieConsent = (function() {
         }
         
         // Add event listeners to buttons
-        document.getElementById("accept-cookies").addEventListener("click", () => {
-            acceptAllCookies();
-            hideBanner();
-        });
+        const acceptButton = document.getElementById("accept-cookies");
+        if (acceptButton) {
+            acceptButton.addEventListener("click", () => {
+                acceptAllCookies();
+                hideBanner();
+            });
+        }
         
-        document.getElementById("decline-cookies").addEventListener("click", () => {
-            acceptEssentialCookies();
-            hideBanner();
-        });
+        const declineButton = document.getElementById("decline-cookies");
+        if (declineButton) {
+            declineButton.addEventListener("click", () => {
+                acceptEssentialCookies();
+                hideBanner();
+            });
+        }
         
         // Add event listener for preference button in footer
         addPreferenceButtonListener();
@@ -51,10 +60,13 @@ const MIRDCookieConsent = (function() {
      * Check for existing consent in localStorage
      */
     function checkExistingConsent() {
-        const storedConsent = localStorage.getItem("mird_consent");
+        const storedConsent =
+            localStorage.getItem(CONSENT_KEY) || localStorage.getItem(LEGACY_CONSENT_KEY);
         if (storedConsent) {
             try {
                 currentConsent = JSON.parse(storedConsent);
+                // Migrate legacy key if present.
+                saveConsent();
                 if (currentConsent.accepted) {
                     const banner = document.getElementById("cookie-consent");
                     if (banner) {
@@ -234,40 +246,37 @@ const MIRDCookieConsent = (function() {
      * Save consent to localStorage
      */
     function saveConsent() {
-        localStorage.setItem('mird_consent', JSON.stringify(currentConsent));
+        localStorage.setItem(CONSENT_KEY, JSON.stringify(currentConsent));
     }
     
     /**
      * Add event listener for cookie preferences button in footer
      */
     function addPreferenceButtonListener() {
-        // Add a small delay to ensure the DOM is fully loaded
-        setTimeout(() => {
-            // Create the cookie preferences link if it doesn't exist
-            const footerLegal = document.querySelector('.footer-column h3:contains("Legal")');
-            if (footerLegal) {
-                const legalList = footerLegal.nextElementSibling;
-                if (legalList) {
-                    // Check if the cookie preferences link already exists
-                    const existingLink = Array.from(legalList.querySelectorAll('a')).find(a => 
-                        a.textContent.includes('Cookie Preferences')
-                    );
-                    
-                    if (!existingLink) {
-                        const listItem = document.createElement('li');
-                        const link = document.createElement('a');
-                        link.href = 'javascript:void(0);';
-                        link.textContent = 'Cookie Preferences';
-                        link.id = 'cookie-preferences-link';
-                        listItem.appendChild(link);
-                        legalList.appendChild(listItem);
-                        
-                        // Add event listener
-                        link.addEventListener('click', showPreferencesModal);
-                    }
+        const maxAttempts = 20;
+        const retryDelayMs = 250;
+        let attempts = 0;
+
+        const bindWhenAvailable = () => {
+            const preferenceLink = document.getElementById('cookie-preferences-link');
+            if (preferenceLink) {
+                if (preferenceLink.dataset.cookiePrefsBound !== 'true') {
+                    preferenceLink.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        showPreferencesModal();
+                    });
+                    preferenceLink.dataset.cookiePrefsBound = 'true';
                 }
+                return;
             }
-        }, 500);
+
+            attempts += 1;
+            if (attempts < maxAttempts) {
+                setTimeout(bindWhenAvailable, retryDelayMs);
+            }
+        };
+
+        bindWhenAvailable();
     }
     
     // Public API
@@ -279,5 +288,5 @@ const MIRDCookieConsent = (function() {
 
 // Initialize cookie consent when the DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    MIRDCookieConsent.init();
+    FRTBCookieConsent.init();
 });

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const placeholder = document.getElementById("footer-container");
+    const placeholder = document.getElementById("footer-container") ||
+        document.getElementById("footer-placeholder");
     if (!placeholder) return;
     fetch('footer.html')
         .then(response => response.text())
