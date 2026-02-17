@@ -16,7 +16,7 @@ This document provides an overview of the high-conversion landing page created f
 2. **Strategic Discount Implementation**
    - 25% discount prominently displayed ($199 → $149.25)
    - Countdown timer creating urgency (3-day limited offer)
-   - Exclusive coupon code (IRDERIVS25_JAN_2026) with copy functionality
+   - Exclusive coupon code (IRDERIVS25_FEB_2026) with copy functionality
    - Limited seats indicator to enhance scarcity
 
 3. **Social Proof**

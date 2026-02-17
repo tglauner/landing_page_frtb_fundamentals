@@ -90,7 +90,7 @@ Research from Voucherify, Shopify, and course marketing experts suggests these s
 
 ### 7. Personalized Coupon Codes
 - Create coupon codes that feel personalized to the finance industry
-- Use finance-related terms in the coupon code (e.g., "IRDERIVS25_JAN_2026")
+- Use finance-related terms in the coupon code (e.g., "IRDERIVS25_FEB_2026")
 - Make codes easy to remember and type
 
 ### 8. Clear Terms and Conditions
