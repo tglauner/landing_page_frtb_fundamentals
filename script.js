@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
         videoPreview.addEventListener('click', function() {
             // In a real implementation, this would open a video modal
             // For this demo, we'll just redirect to the Udemy course preview
-            window.open('https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_MAR_2026', '_blank');
+            window.open('https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_APR_2026', '_blank');
         });
     }
 });
