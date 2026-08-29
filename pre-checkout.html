@@ -187,7 +187,7 @@
             background-color: #e89806;
         }
         
-        .checkout-button:disabled {
+        .checkout-button[aria-disabled="true"] {
             background-color: #ccc;
             cursor: not-allowed;
         }
@@ -223,9 +223,9 @@
                 <ul>
                     <li><a href="index.html#curriculum">Curriculum</a></li>
                     <li><a href="index.html#instructor">Instructor</a></li>
-                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#reviews">Reviews</a></li>
                     <li><a href="index.html#faq">FAQ</a></li>
-                    <li><a href="index.html#pricing" class="nav-cta">Enroll Now</a></li>
+                    <li><a href="index.html#enroll" class="nav-cta">Enroll Now</a></li>
                 </ul>
             </nav>
         </div>
@@ -284,7 +284,7 @@
         
         <div class="checkout-actions">
             <a href="index.html" class="back-button">Back to Course</a>
-            <a href="#" id="checkout-button" class="checkout-button" disabled>Proceed to Udemy Checkout</a>
+            <a href="https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_AUG_2026" id="checkout-button" class="checkout-button" target="_blank" rel="noopener noreferrer" aria-disabled="true">Proceed to Udemy Checkout</a>
         </div>
     </div>
 
@@ -298,15 +298,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             const termsCheckbox = document.getElementById('terms-checkbox');
             const checkoutButton = document.getElementById('checkout-button');
-            const udemy_url = "https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_AUG_2026";
-            
             // Enable/disable checkout button based on checkbox
             termsCheckbox.addEventListener('change', function() {
                 if (this.checked) {
-                    checkoutButton.removeAttribute('disabled');
+                    checkoutButton.setAttribute('aria-disabled', 'false');
                     checkoutButton.style.opacity = '1';
                 } else {
-                    checkoutButton.setAttribute('disabled', 'disabled');
+                    checkoutButton.setAttribute('aria-disabled', 'true');
                     checkoutButton.style.opacity = '0.5';
                 }
             });
@@ -321,9 +319,6 @@
                     alert('Please agree to the terms before proceeding.');
                     return false;
                 }
-                
-                // Redirect to Udemy
-                window.location.href = udemy_url;
             });
         });
     </script>
