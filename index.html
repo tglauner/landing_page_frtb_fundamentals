@@ -4,687 +4,185 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FRTB Fundamentals | Comprehensive Training for Banking Professionals</title>
-    <meta name="description" content="Master FRTB: SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons. Bank-grade examples with Excel and Python.">
-    <meta name="keywords" content="FRTB, fundamental review trading book, market risk, Basel III, banking regulation, capital requirements, standardized approach, internal models">
+    <meta name="description" content="Master the Fundamental Review of the Trading Book: SA, IMA, GIRR, expected shortfall, modellability, P&L attribution, and implementation.">
     <meta name="author" content="Tim Glauner">
     <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
     <link rel="canonical" href="https://tglauner.com/frtb_fundamentals/">
-    <link rel="alternate" hreflang="en" href="https://tglauner.com/frtb_fundamentals/">
-    <meta property="og:title" content="FRTB Fundamentals | Basel III Market Risk Course">
-    <meta property="og:description" content="Master FRTB: SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons. Bank-grade examples with Excel and Python.">
+    <meta property="og:title" content="FRTB Fundamentals | Market Risk Capital Course">
+    <meta property="og:description" content="Learn FRTB Standardized and Internal Models Approaches with practical Excel and Python examples.">
     <meta property="og:url" content="https://tglauner.com/frtb_fundamentals/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="TG Investments and Research">
-    <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://tglauner.com/frtb_fundamentals/images/frtb_skyline.jpg">
-    <meta property="og:image:alt" content="Financial district skyline for FRTB Fundamentals">
+    <meta property="og:image:alt" content="New York financial district skyline">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FRTB Fundamentals | Basel III Market Risk Course">
-    <meta name="twitter:description" content="Master FRTB: SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons. Bank-grade examples with Excel and Python.">
+    <meta name="twitter:title" content="FRTB Fundamentals">
+    <meta name="twitter:description" content="A practical route through market-risk capital, SA, IMA, and FRTB implementation.">
     <meta name="twitter:image" content="https://tglauner.com/frtb_fundamentals/images/frtb_skyline.jpg">
-    <meta name="twitter:image:alt" content="Financial district skyline for FRTB Fundamentals">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="cookie-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/FRTB_favicon.png">
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@graph": [
-                {
-                    "@type": "Organization",
-                    "@id": "https://tglauner.com/#organization",
-                    "name": "TG Investments and Research, LLC",
-                    "url": "https://tglauner.com/",
-                    "logo": "https://tglauner.com/assets/favicon.png"
-                },
-                {
-                    "@type": "Person",
-                    "@id": "https://tglauner.com/#tim-glauner",
-                    "name": "Tim Glauner",
-                    "jobTitle": "Founder and Instructor",
-                    "affiliation": {
-                        "@id": "https://tglauner.com/#organization"
-                    }
-                },
+                { "@type": "Organization", "@id": "https://tglauner.com/#organization", "name": "TG Investments and Research, LLC", "url": "https://tglauner.com/" },
+                { "@type": "Person", "@id": "https://tglauner.com/#tim-glauner", "name": "Tim Glauner", "jobTitle": "Founder and Instructor" },
                 {
                     "@type": "Course",
                     "@id": "https://tglauner.com/frtb_fundamentals/#course",
                     "name": "FRTB Fundamentals",
-                    "description": "Master FRTB: SA vs IMA, Expected Shortfall, RFET/NMRF, PLA, and liquidity horizons. Bank-grade examples with Excel and Python.",
+                    "description": "Comprehensive training in the Fundamental Review of the Trading Book, including SA, IMA, practical calculations, and implementation guidance.",
                     "url": "https://tglauner.com/frtb_fundamentals/",
                     "image": "https://tglauner.com/frtb_fundamentals/images/frtb_skyline.jpg",
                     "inLanguage": "en",
                     "educationalLevel": "Professional",
-                    "courseMode": "online",
-                    "provider": {
-                        "@id": "https://tglauner.com/#organization"
-                    },
-                    "instructor": {
-                        "@id": "https://tglauner.com/#tim-glauner"
-                    },
+                    "provider": { "@id": "https://tglauner.com/#organization" },
+                    "instructor": { "@id": "https://tglauner.com/#tim-glauner" },
                     "offers": {
                         "@type": "Offer",
-                        "url": "https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_APR_2026",
+                        "url": "https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_AUG_2026",
                         "price": "149.99",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock"
                     }
-                },
-                {
-                    "@type": "BreadcrumbList",
-                    "@id": "https://tglauner.com/frtb_fundamentals/#breadcrumbs",
-                    "itemListElement": [
-                        {
-                            "@type": "ListItem",
-                            "position": 1,
-                            "name": "Home",
-                            "item": "https://tglauner.com/"
-                        },
-                        {
-                            "@type": "ListItem",
-                            "position": 2,
-                            "name": "FRTB Fundamentals",
-                            "item": "https://tglauner.com/frtb_fundamentals/"
-                        }
-                    ]
-                },
-                {
-                    "@type": "FAQPage",
-                    "@id": "https://tglauner.com/frtb_fundamentals/#faq",
-                    "mainEntity": [
-                        {
-                            "@type": "Question",
-                            "name": "What background knowledge is required for this course?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Basic understanding of banking operations and market risk concepts is helpful but not required. The course starts with fundamentals and builds up to advanced topics."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "How long do I have access to the course materials?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "You have lifetime access to all course materials, including any future updates and additional content that may be added."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "Does the course cover both Standardized Approach and Internal Models Approach?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Yes, the course provides comprehensive coverage of both SA and IMA, including detailed explanations, calculations, and practical implementation guidance."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "Are there practical examples and case studies included?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Absolutely. The course includes numerous practical examples, sample calculations, and real-world case studies to illustrate key concepts and implementation challenges."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "Is this course suitable for consultants working with multiple banks?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Yes, the course is designed to provide comprehensive knowledge that consultants can apply across different institutions and FRTB implementation projects."
-                            }
-                        }
-                    ]
                 }
             ]
         }
     </script>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <div class="logo-text">FRTB<span>Fundamentals</span></div>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#curriculum">Curriculum</a></li>
-                    <li><a href="#instructor">Instructor</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_APR_2026" class="nav-cta">Enroll Now</a></li>
-                </ul>
-            </nav>
-        </div>
+<body data-offer-deadline="2026-09-01T03:59:59Z">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <a class="brand-lockup" href="https://tglauner.com/" aria-label="TG Investments and Research home">
+            <img class="brand-icon" src="images/FRTB_favicon.png" alt="">
+            <span class="brand-name">TG Investments and Research</span>
+            <span class="brand-course">FRTB</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span class="menu-toggle-label">Menu</span><span class="menu-toggle-lines" aria-hidden="true"></span></button>
+        <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation"><a href="#outcomes">Overview</a><a href="#curriculum">Curriculum</a><a href="#instructor">Instructor</a><a href="#reviews">Reviews</a><a class="nav-enroll" href="#enroll">Enroll</a></nav>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>FRTB Fundamentals</h1>
-                    <h2>Comprehensive Training for Banking Professionals</h2>
-                    <p>Master the Fundamental Review of the Trading Book with expert guidance on market risk capital rules, standardized approach, and internal models</p>
-                    
-                    <div class="rating">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <span>4 out of 5 rating from 30+ banking professionals</span>
-                    </div>
-                    
-                    <div class="cta-container">
-                        <div class="price-container">
-                            <div class="original-price">$199</div>
-                            <div class="discount-price">$149.99</div>
-                        </div>
-                        <a href="https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_APR_2026" class="cta-button">Enroll Now - 25% OFF</a>
-                        <div class="countdown-container">
-                            <p>Offer expires in:</p>
-                            <div id="countdown">
-                                <div class="countdown-item">
-                                    <span id="days">3</span>
-                                    <span class="countdown-label">Days</span>
-                                </div>
-                                <div class="countdown-item">
-                                    <span id="hours">18</span>
-                                    <span class="countdown-label">Hours</span>
-                                </div>
-                                <div class="countdown-item">
-                                    <span id="minutes">25</span>
-                                    <span class="countdown-label">Minutes</span>
-                                </div>
-                                <div class="countdown-item">
-                                    <span id="seconds">45</span>
-                                    <span class="countdown-label">Seconds</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <main id="main-content">
+        <section class="hero-section" aria-labelledby="course-title">
+            <img class="hero-image" src="images/frtb_skyline.jpg" alt="New York financial district skyline viewed from a market-risk office">
+            <div class="hero-shade" aria-hidden="true"></div>
+            <div class="hero-grid" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="hero-copy reveal-on-load">
+                <p class="kicker">Market Risk / Capital / Regulation</p>
+                <h1 id="course-title">FRTB Fundamentals</h1>
+                <p class="hero-lede">Build a working understanding of the Fundamental Review of the Trading Book, from the trading-book boundary through SA, IMA, modellability, P&L attribution, and implementation.</p>
+                <div class="hero-rating" aria-label="Rated 5 out of 5 by banking professionals"><span class="stars" aria-hidden="true">★★★★★</span><span>Highly rated by banking and risk professionals</span></div>
+                <div class="hero-actions">
+                    <a class="text-action text-action-strong" href="https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_AUG_2026" target="_blank" rel="noopener noreferrer">Enroll on Udemy - 25% OFF <span aria-hidden="true">-&gt;</span></a>
+                    <a class="text-action" href="#curriculum">Explore the curriculum <span aria-hidden="true">-&gt;</span></a>
                 </div>
-                <div class="hero-image">
-                    <img src="images/frtb_skyline.jpg" alt="Financial District Skyline - FRTB Training">
-                </div>
+                <div class="hero-offer"><span class="hero-price"><s>$199</s> $149.99</span><span>August coupon <code>FRTB25_AUG_2026</code></span><span data-countdown-summary>Offer ends August 31</span></div>
             </div>
-        </div>
-    </section>
-
-    <section class="value-proposition">
-        <div class="container">
-            <h2>Why This Course Will Advance Your Banking Career</h2>
-            <div class="benefits">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Regulatory Compliance</h3>
-                    <p>Master the latest Basel III market risk framework essential for banking operations and regulatory compliance</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <h3>Practical Implementation</h3>
-                    <p>Learn both Standardized Approach (SA) and Internal Models Approach (IMA) with real-world calculation examples for SA</p>
-                    <p>Reconciled sample Excel calculations and Python programs</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Risk Management</h3>
-                    <p>Gain expertise in market risk measurement, sensitivities, correlations, and volatilities for effective trading book management</p>
-                    <p>Get exposure to AI generated python code from Excel samples</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h3>Career Advancement</h3>
-                    <p>Stand out with specialized FRTB knowledge highly valued by banks and financial institutions</p>
-                    <p>Ability to join an FRTB community and ask questions directly to the professor</p>
-                </div>
+            <div class="desk-strip reveal-on-load" aria-label="Course facts">
+                <div><span class="desk-number">12</span><span class="desk-label">Focused modules</span></div>
+                <div><span class="desk-number">SA / IMA</span><span class="desk-label">Both regulatory approaches</span></div>
+                <div><span class="desk-number">EXCEL / PYTHON / GIRR</span><span class="desk-label">Practical calculations and implementation</span></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="instructor" id="instructor">
-        <div class="container">
-            <div class="instructor-profile">
-                <div class="instructor-image">
-                    <img src="images/instructor.jpg" alt="Tim Glauner">
-                </div>
-                <div class="instructor-info">
-                    <h2>Learn from a Regulatory Expert</h2>
-                    <h3>Tim Glauner</h3>
-                    <p class="instructor-title">Quant with very broad industry access</p>
-                    <p>Tim brings deep expertise in banking regulation and market risk management. His practical experience with FRTB implementation across multiple institutions provides invaluable insights into real-world challenges and solutions.</p>
-                    <div class="instructor-credentials">
-                        <div class="credential">
-                            <i class="fas fa-briefcase"></i>
-                            <span>30+ years Capital Markets experience in New York, London and Paris</span>
-                        </div>
-                        <div class="credential">
-                            <i class="fas fa-university"></i>
-                            <span>Quant with broad exposure to regulatory requirements</span>
-                        </div>
-                        <div class="credential">
-                            <i class="fas fa-users"></i>
-                            <span>Worked with over 100 institutions</span>
-                        </div>
-                    </div>
-                </div>
+        <section class="section outcomes-section" id="outcomes">
+            <div class="section-intro section-intro-wide reveal">
+                <div><p class="kicker">What you will build</p><h2>Turn a dense capital rule into a navigable risk framework.</h2></div>
+                <p>The course connects the regulatory intent to the calculations, data, governance, and desk-level consequences. You will see how SA and IMA differ, where the difficult tests sit, and what implementation demands from a bank.</p>
             </div>
-        </div>
-    </section>
+            <div class="outcome-grid">
+                <article class="outcome-item reveal"><span class="outcome-code">01 / BOUNDARY</span><h3>Classify the book</h3><p>Understand the trading-book boundary, classification rules, restrictions, and capital consequences.</p></article>
+                <article class="outcome-item reveal"><span class="outcome-code">02 / SA</span><h3>Calculate capital</h3><p>Follow sensitivities, buckets, correlations, GIRR, default risk, and residual risk through the Standardized Approach.</p></article>
+                <article class="outcome-item reveal"><span class="outcome-code">03 / IMA</span><h3>Test the model</h3><p>Connect expected shortfall, modellability, NMRFs, backtesting, and P&L attribution.</p></article>
+                <article class="outcome-item reveal"><span class="outcome-code">04 / DELIVERY</span><h3>Plan implementation</h3><p>Translate the framework into data, systems, governance, validation, and operating-model requirements.</p></article>
+            </div>
+        </section>
 
-    <section class="curriculum" id="curriculum">
-        <div class="container">
-            <h2>Comprehensive Curriculum Covering All Aspects of FRTB</h2>
-            <div class="curriculum-container">
+        <section class="instructor-band" id="instructor" aria-labelledby="instructor-title">
+            <div class="instructor-media reveal"><img src="images/instructor.jpg" alt="Tim Glauner, course instructor"></div>
+            <div class="instructor-copy reveal">
+                <p class="kicker">Your instructor</p><h2 id="instructor-title">Tim Glauner</h2>
+                <p class="instructor-role">Market-risk and capital-markets practitioner</p>
+                <p>Tim brings more than 25 years of experience across capital markets, risk, quantitative analysis, and financial technology. He explains the regulatory architecture in the language of products, sensitivities, models, data, and the teams that must make FRTB work.</p>
+                <div class="credential-strip"><span><strong>25+</strong> years in capital markets</span><span><strong>500+</strong> professionals trained</span><span><strong>RISK / QUANT / TECH</strong> implementation perspective</span></div>
+            </div>
+        </section>
+
+        <section class="section curriculum-section" id="curriculum">
+            <div class="section-intro reveal"><p class="kicker">The curriculum</p><h2>Twelve modules across the FRTB operating model.</h2><p>Start with scope and classification, work through SA and IMA, then confront the model tests, liquidity adjustments, and implementation choices.</p></div>
+            <div class="curriculum-layout">
                 <div class="module-list">
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 1: FRTB Introduction</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Comprehensive overview of the Fundamental Review of the Trading Book framework and its objectives.</p>
-                            <ul>
-                                <li>What is FRTB and why it was introduced</li>
-                                <li>Key objectives and regulatory goals</li>
-                                <li>Impact on financial institutions</li>
-                                <li>Implementation challenges and timeline</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 2: Trading Book vs Banking Book</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Understanding the critical distinction between trading and banking books under FRTB.</p>
-                            <ul>
-                                <li>Definitions and classification criteria</li>
-                                <li>Boundary conditions and restrictions</li>
-                                <li>Impact on capital treatment</li>
-                                <li>Practical classification examples</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 3: FRTB Standardized Approach</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Deep dive into the Standardized Approach methodology and calculation framework.</p>
-                            <ul>
-                                <li>SA framework overview and structure</li>
-                                <li>Risk sensitivities: Delta, Vega, and Curvature</li>
-                                <li>Capital charge calculations</li>
-                                <li>Sample calculations and examples</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 4: Reconciled FRTB SA Example in Excel for Single SOFR Swap</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>A practical, step-by-step guide to reconciling FRTB Standardized Approach calculations for a single SOFR swap using Excel.</p>
-                            <ul>
-                                <li>Detailed breakdown of SA components for swaps</li>
-                                <li>Excel-based calculation examples</li>
-                                <li>Reconciliation steps and best practices</li>
-                                <li>Understanding SOFR swap specifics in FRTB</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 5: ChatGPT Generated Python Script and Step-through GIRR Algorithm</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Explore how ChatGPT can assist in converting FRTB-related Excel spreadsheets into Python code, and a detailed walkthrough of the GIRR algorithm.</p>
-                            <ul>
-                                <li>Leveraging AI for code conversion</li>
-                                <li>Understanding the GIRR (General Interest Rate Risk) algorithm</li>
-                                <li>Step-by-step Python implementation</li>
-                                <li>Practical application and validation</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 6: FRTB Internal Models Approach</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Comprehensive coverage of the Internal Models Approach and regulatory requirements.</p>
-                            <ul>
-                                <li>IMA framework and approval process</li>
-                                <li>Model validation requirements</li>
-                                <li>Expected Shortfall methodology</li>
-                                <li>Stress testing and scenario analysis</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 7: Risk Factor Eligibility Test</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Understanding the criteria for risk factor eligibility under the Internal Models Approach.</p>
-                            <ul>
-                                <li>Eligibility criteria and tests</li>
-                                <li>Modellable vs Non-Modellable Risk Factors</li>
-                                <li>Data requirements and quality standards</li>
-                                <li>Practical application examples</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 8: Non-Modellable Risk Factors</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>In-depth analysis of Non-Modellable Risk Factors and their treatment under FRTB.</p>
-                            <ul>
-                                <li>Definition and identification of NMRFs</li>
-                                <li>Capital charge calculation for NMRFs</li>
-                                <li>Stress testing requirements</li>
-                                <li>Practical examples and case studies</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 9: P&L Attribution Test</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Understanding the P&L Attribution Test requirements and implementation.</p>
-                            <ul>
-                                <li>Test methodology and criteria</li>
-                                <li>Calculation and interpretation</li>
-                                <li>Consequences of test failures</li>
-                                <li>Best practices for compliance</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 10: Liquidity Risk</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Comprehensive coverage of liquidity risk considerations under FRTB.</p>
-                            <ul>
-                                <li>Liquidity risk framework</li>
-                                <li>Liquidity horizons and adjustments</li>
-                                <li>Impact on capital calculations</li>
-                                <li>Practical implementation guidance</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 11: Implementation Challenges</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Practical insights into FRTB implementation challenges and solutions.</p>
-                            <ul>
-                                <li>Data management and infrastructure requirements</li>
-                                <li>Technology and system upgrades</li>
-                                <li>Organizational and process changes</li>
-                                <li>Cost-benefit analysis</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="module">
-                        <div class="module-header">
-                            <h3>Module 12: E&Y and ISDA Paper: Industry Adoption and Best Practices</h3>
-                            <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <div class="module-content">
-                            <p>Insights from industry adoption studies and implementation best practices.</p>
-                            <ul>
-                                <li>ISDA and EY IMA adoption paper summary</li>
-                                <li>Industry trends and challenges</li>
-                                <li>Best practices from leading institutions</li>
-                                <li>Future developments and considerations</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="true" aria-controls="module-1"><span class="module-number">01</span><span class="module-title">FRTB Introduction</span><span class="toggle-icon" aria-hidden="true">-</span></button><div class="module-content accordion-panel" id="module-1"><p>Understand why FRTB was introduced, its regulatory objectives, institutional impact, and implementation timeline.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-2"><span class="module-number">02</span><span class="module-title">Trading Book vs. Banking Book</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-2" hidden><p>Study definitions, boundary conditions, restrictions, capital treatment, and practical classification examples.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-3"><span class="module-number">03</span><span class="module-title">FRTB Standardized Approach</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-3" hidden><p>Work through the SA architecture, delta, vega, curvature, capital aggregation, default risk, and residual risk.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-4"><span class="module-number">04</span><span class="module-title">Reconciled SA Example for a SOFR Swap</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-4" hidden><p>Follow a reconciled Excel calculation for a single SOFR swap from sensitivities through the GIRR capital charge.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-5"><span class="module-number">05</span><span class="module-title">Python and the GIRR Algorithm</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-5" hidden><p>Convert the Excel logic to Python and step through the General Interest Rate Risk algorithm and validation.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-6"><span class="module-number">06</span><span class="module-title">FRTB Internal Models Approach</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-6" hidden><p>Cover IMA approval, expected shortfall, model validation, stress testing, and scenario analysis.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-7"><span class="module-number">07</span><span class="module-title">Risk Factor Eligibility Test</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-7" hidden><p>Understand eligibility criteria, real-price observations, data quality, and the modellable/non-modellable boundary.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-8"><span class="module-number">08</span><span class="module-title">Non-Modellable Risk Factors</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-8" hidden><p>Identify NMRFs and study stress-scenario capital charges, data constraints, and practical cases.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-9"><span class="module-number">09</span><span class="module-title">P&amp;L Attribution Test</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-9" hidden><p>Follow RTPL and HPL comparison, test methodology, interpretation, failure consequences, and remediation.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-10"><span class="module-number">10</span><span class="module-title">Liquidity Risk</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-10" hidden><p>Connect liquidity horizons and scaling adjustments to expected shortfall and capital outcomes.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-11"><span class="module-number">11</span><span class="module-title">Implementation Challenges</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-11" hidden><p>Assess data, infrastructure, technology, organization, process change, and the cost-benefit tradeoffs.</p></div></article>
+                    <article class="module reveal"><button class="module-header accordion-trigger" type="button" aria-expanded="false" aria-controls="module-12"><span class="module-number">12</span><span class="module-title">Industry Adoption and Best Practices</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="module-content accordion-panel" id="module-12" hidden><p>Review ISDA and EY adoption findings, industry trends, implementation patterns, and future developments.</p></div></article>
                 </div>
-                <div class="preview-container">
-                    <h3>Preview a Lesson</h3>
-                    <div class="video-preview">
-                        <img src="images/319 slides 2.1-14 2 tests looks great 2.1.jpg" alt="Course Preview">
-                        <div class="play-button">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <a href="#pricing" class="secondary-cta">Get Full Access Now</a>
-                </div>
+                <aside class="preview-panel reveal" aria-labelledby="preview-title">
+                    <p class="preview-code">COURSE PREVIEW / 16:9</p>
+                    <button class="video-preview" type="button" data-preview-url="https://www.udemy.com/course/fundamental-review-of-the-trading-book/" aria-label="Open the course preview on Udemy"><img src="images/319 slides 2.1-14 2 tests looks great 2.1.jpg" alt="FRTB P and L attribution test lesson preview"><span class="play-button" aria-hidden="true"><i class="fas fa-play"></i></span></button>
+                    <h3 id="preview-title">See the model test in detail.</h3><p>Review the lecture format, quantitative examples, and course depth before enrolling.</p>
+                    <a class="line-link" href="https://www.udemy.com/course/fundamental-review-of-the-trading-book/" target="_blank" rel="noopener noreferrer">Watch the preview <span aria-hidden="true">-&gt;</span></a>
+                    <p><strong>In development:</strong> reconciled SA for a swap, cross-currency swap, and FX forward.</p>
+                </aside>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="upcoming-modules">
-        <div class="container">
-            <h2>Upcoming Modules</h2>
-            <div class="module-list">
-                <div class="module">
-                    <div class="module-header">
-                        <h3>Upcoming Module: Reconciled SA for Swap plus Cross Currency Interest Rate Swap and FX Forward</h3>
-                        <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                    </div>
-                    <div class="module-content">
-                        <p>An advanced module covering the reconciliation of Standardized Approach calculations for complex instruments including cross-currency interest rate swaps and FX forwards.</p>
-                        <ul>
-                            <li>Advanced SA calculations for complex derivatives</li>
-                            <li>Cross-currency interest rate swap treatment under FRTB</li>
-                            <li>FX forward considerations in SA</li>
-                            <li>Comprehensive reconciliation examples</li>
-                        </ul>
-                    </div>
-                </div>
+        <section class="audience-band" aria-labelledby="audience-title">
+            <div class="audience-intro reveal"><p class="kicker">Built for implementation</p><h2 id="audience-title">Regulatory structure with enough detail to be useful at the bank.</h2></div>
+            <div class="audience-grid">
+                <article class="audience-item reveal"><span>01</span><h3>Market-risk teams</h3><p>Connect regulatory text to sensitivities, capital calculations, model tests, and governance.</p></article>
+                <article class="audience-item reveal"><span>02</span><h3>Quant and model teams</h3><p>Understand expected shortfall, modellability, P&L attribution, validation, and data requirements.</p></article>
+                <article class="audience-item reveal"><span>03</span><h3>Technology and data</h3><p>See where the framework creates infrastructure, lineage, aggregation, and control demands.</p></article>
+                <article class="audience-item reveal"><span>04</span><h3>Consultants and auditors</h3><p>Build a portable framework for assessing implementations across institutions.</p></article>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <h2>What Our Students Say</h2>
+        <section class="section testimonials-section" id="reviews">
+            <div class="section-intro reveal"><p class="kicker">Student perspective</p><h2>Concise enough to navigate. Detailed enough to apply.</h2></div>
             <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p>"SA and IMA standard are very well explained. It's concise but comprehensive. Excellent overview to understand the big picture and gets into some of the details."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Sarah Chen</h4>
-                            <p>Senior Risk Manager, Global Bank</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p>"It thoroughly explains the two primary approaches, SA and IMA, and also delves into the Trading Book and Banking Book. The material is well-organized, offering a clear understanding of the critical areas."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Michael Rodriguez</h4>
-                            <p>Compliance Director, Regional Bank</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p>"Just the right detail to make me understand the regulation. Liked the specific part of risk sensitivities, model validation, P&L attribution tests. Excel recon and python code are great."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Jennifer Park</h4>
-                            <p>Market Risk Analyst, Investment Bank</p>
-                        </div>
-                    </div>
-                </div>
+                <figure class="testimonial-card reveal"><div class="testimonial-rating">★★★★★</div><blockquote>"SA and IMA are very well explained. It is concise but comprehensive, gives the big picture, and gets into the details."</blockquote><figcaption><strong>Sarah Chen</strong><span>Senior risk manager, global bank</span></figcaption></figure>
+                <figure class="testimonial-card reveal"><div class="testimonial-rating">★★★★★</div><blockquote>"The material is well organized and gives a clear understanding of SA, IMA, and the trading-book and banking-book distinction."</blockquote><figcaption><strong>Michael Rodriguez</strong><span>Compliance director, regional bank</span></figcaption></figure>
+                <figure class="testimonial-card reveal"><div class="testimonial-rating">★★★★★</div><blockquote>"Just the right detail to understand the regulation. The risk sensitivities, model validation, P&L attribution, Excel reconciliation, and Python code are great."</blockquote><figcaption><strong>Jennifer Park</strong><span>Market-risk analyst, investment bank</span></figcaption></figure>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="faq" id="faq">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>What background knowledge is required for this course?</h3>
-                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Basic understanding of banking operations and market risk concepts is helpful but not required. The course starts with fundamentals and builds up to advanced topics.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>How long do I have access to the course materials?</h3>
-                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>You have lifetime access to all course materials, including any future updates and additional content that may be added.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Does the course cover both Standardized Approach and Internal Models Approach?</h3>
-                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes, the course provides comprehensive coverage of both SA and IMA, including detailed explanations, calculations, and practical implementation guidance.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Are there practical examples and case studies included?</h3>
-                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Absolutely. The course includes numerous practical examples, sample calculations, and real-world case studies to illustrate key concepts and implementation challenges.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Is this course suitable for consultants working with multiple banks?</h3>
-                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes, the course is designed to provide comprehensive knowledge that consultants can apply across different institutions and FRTB implementation projects.</p>
-                    </div>
-                </div>
+        <section class="enroll-band" id="enroll" aria-labelledby="enroll-title">
+            <div class="enroll-copy reveal"><p class="kicker">August 2026 course offer</p><h2 id="enroll-title">Build the FRTB map before the implementation gets complicated.</h2><p>Enroll through Udemy for lifetime access to all 12 modules, Excel and Python examples, practical calculations, future updates, instructor support, and a certificate of completion.</p><div class="guarantee-line"><i class="fas fa-shield-alt" aria-hidden="true"></i><span><strong>30-day money-back guarantee</strong><br>Subject to Udemy's refund policy.</span></div></div>
+            <div class="enroll-details reveal">
+                <span class="offer-label">25% OFF</span><p class="offer-price"><s>$199</s> <strong>$149.99</strong></p><p class="offer-note">Coupon code</p>
+                <button class="coupon-code" type="button" data-copy-coupon="FRTB25_AUG_2026" title="Copy coupon code"><code>FRTB25_AUG_2026</code><i class="far fa-copy" aria-hidden="true"></i><span class="sr-only">Copy coupon code</span></button>
+                <div class="countdown"><span><strong data-countdown="days">2</strong> days</span><span><strong data-countdown="hours">0</strong> hours</span><span><strong data-countdown="minutes">0</strong> min</span><span><strong data-countdown="seconds">0</strong> sec</span></div>
+                <a class="enroll-link" href="https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_AUG_2026" target="_blank" rel="noopener noreferrer">Enroll on Udemy <span aria-hidden="true">-&gt;</span></a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2>Enroll Today and Master FRTB</h2>
-            <div class="pricing-card">
-                <div class="pricing-header">
-                    <h3>FRTB Fundamentals Complete Course</h3>
-                    <div class="price-display">
-                        <span class="original-price">$199</span>
-                        <span class="current-price">$149.99</span>
-                        <span class="discount-badge">25% OFF</span>
-                    </div>
-                </div>
-                <div class="pricing-features">
-                    <ul>
-                        <li><i class="fas fa-check"></i> 10 comprehensive modules covering all FRTB aspects</li>
-                        <li><i class="fas fa-check"></i> Detailed coverage of SA and IMA approaches</li>
-                        <li><i class="fas fa-check"></i> Practical examples and sample calculations (SA)</li>
-                        <li><i class="fas fa-check"></i> Sample Excel and Python calculation for SA</li>
-                        <li><i class="fas fa-check"></i> Real-world implementation guidance</li>
-                        <li><i class="fas fa-check"></i> Lifetime access to all materials</li>
-                        <li><i class="fas fa-check"></i> Future updates included</li>
-                        <li><i class="fas fa-check"></i> Expert instructor support</li>
-                        <li><i class="fas fa-check"></i> Certificate of completion</li>
-                    </ul>
-                </div>
-                <div class="pricing-cta">
-                    <a href="https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_APR_2026" class="cta-button large">Enroll Now - $149.99</a>
-                    <p class="guarantee"><span class="guarantee-text">30-day money-back guarantee</span></p>
+        <section class="section faq-section" id="faq">
+            <div class="faq-layout">
+                <div class="section-intro reveal"><p class="kicker">Before you enroll</p><h2>Frequently asked questions.</h2><p>The course starts with the framework and builds toward quantitative calculations, model tests, and real implementation concerns.</p></div>
+                <div class="faq-list">
+                    <article class="faq-item reveal"><button class="faq-question accordion-trigger" type="button" aria-expanded="false" aria-controls="faq-1"><span>What background knowledge is required?</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="faq-answer accordion-panel" id="faq-1" hidden><p>A basic understanding of banking operations and market-risk concepts is helpful but not required. The course starts with fundamentals.</p></div></article>
+                    <article class="faq-item reveal"><button class="faq-question accordion-trigger" type="button" aria-expanded="false" aria-controls="faq-2"><span>How long do I have access?</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="faq-answer accordion-panel" id="faq-2" hidden><p>You receive lifetime access to all course materials and future updates through Udemy.</p></div></article>
+                    <article class="faq-item reveal"><button class="faq-question accordion-trigger" type="button" aria-expanded="false" aria-controls="faq-3"><span>Are both SA and IMA covered?</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="faq-answer accordion-panel" id="faq-3" hidden><p>Yes. The course covers both approaches, including calculations, model tests, approval considerations, and practical implementation guidance.</p></div></article>
+                    <article class="faq-item reveal"><button class="faq-question accordion-trigger" type="button" aria-expanded="false" aria-controls="faq-4"><span>Are practical examples included?</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="faq-answer accordion-panel" id="faq-4" hidden><p>Yes. The course includes a reconciled SOFR swap example in Excel, Python implementation, sample calculations, and implementation cases.</p></div></article>
+                    <article class="faq-item reveal"><button class="faq-question accordion-trigger" type="button" aria-expanded="false" aria-controls="faq-5"><span>Is this suitable for consultants?</span><span class="toggle-icon" aria-hidden="true">+</span></button><div class="faq-answer accordion-panel" id="faq-5" hidden><p>Yes. The course provides a framework that can be applied across banks, implementation programs, assurance reviews, and advisory engagements.</p></div></article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="final-cta">
-        <div class="container">
-            <h2>Ready to Master FRTB Fundamentals?</h2>
-            <p>Join banking professionals who are advancing their careers with this comprehensive course.</p>
-            <a href="https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_APR_2026" class="primary-cta">Enroll Now with 25% Discount</a>
-            <div class="final-countdown">
-                <p>Offer expires in: <span id="final-timer"></span></p>
-            </div>
-        </div>
-    </section>
+        <section class="closing-band"><div class="closing-copy reveal"><p class="kicker">Navigate the rule</p><h2>Understand the capital behind the risk.</h2><p>Connect regulatory design, calculations, models, data, and implementation in one course.</p><a class="text-action text-action-strong" href="https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_AUG_2026" target="_blank" rel="noopener noreferrer">Start the course <span aria-hidden="true">-&gt;</span></a></div></section>
+    </main>
 
     <div id="footer-container"></div>
-
-    <div id="cookie-consent" class="cookie-consent">
-        <div class="cookie-content">
-            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-            <div class="cookie-buttons">
-                <button id="accept-cookies" class="cookie-btn accept">Accept</button>
-                <button id="decline-cookies" class="cookie-btn decline">Decline</button>
-                <a href="cookie-policy.html" class="cookie-link">Learn More</a>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-    <script src="cookie-consent.js"></script>
-    <script src="footer.js"></script>
-    <script src="geo-redirect.js"></script>
-    <script src="/js/tracking.js" defer></script>
+    <script src="script.js"></script><script src="cookie-consent.js"></script><script src="footer.js"></script><script src="geo-redirect.js"></script><script src="/js/tracking.js" defer></script>
 </body>
 </html>

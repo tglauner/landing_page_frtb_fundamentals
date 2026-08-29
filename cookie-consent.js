@@ -1,13 +1,10 @@
 /**
- * FRTB Cookie Consent Manager
+ * MIRD Cookie Consent Manager
  * Version: 1.0.0
  * Last Updated: May 28, 2025
  */
 
-const FRTBCookieConsent = (function() {
-    const CONSENT_KEY = 'frtb_consent';
-    const LEGACY_CONSENT_KEY = 'mird_consent';
-
+const MIRDCookieConsent = (function() {
     // Default consent settings
     const defaultConsent = {
         essential: true,  // Always required
@@ -16,92 +13,111 @@ const FRTBCookieConsent = (function() {
         accepted: false,
         timestamp: null
     };
-    
+
     // Current consent settings
     let currentConsent = {...defaultConsent};
-    
+
     /**
      * Initialize the cookie consent manager
      */
     function init() {
         // Check for existing consent
         checkExistingConsent();
-        
+
         // If no consent has been given yet, show the banner
         if (!currentConsent.accepted) {
-            const banner = document.getElementById("cookie-consent");
-            if (banner) {
-                banner.style.display = "flex"; // Show the banner
-            }
+            showConsentBanner();
         }
-        
-        // Add event listeners to buttons
-        const acceptButton = document.getElementById("accept-cookies");
-        if (acceptButton) {
-            acceptButton.addEventListener("click", () => {
-                acceptAllCookies();
-                hideBanner();
-            });
-        }
-        
-        const declineButton = document.getElementById("decline-cookies");
-        if (declineButton) {
-            declineButton.addEventListener("click", () => {
-                acceptEssentialCookies();
-                hideBanner();
-            });
-        }
-        
+
         // Add event listener for preference button in footer
         addPreferenceButtonListener();
     }
-    
+
     /**
      * Check for existing consent in localStorage
      */
     function checkExistingConsent() {
-        const storedConsent =
-            localStorage.getItem(CONSENT_KEY) || localStorage.getItem(LEGACY_CONSENT_KEY);
+        const storedConsent = localStorage.getItem('mird_consent');
         if (storedConsent) {
             try {
                 currentConsent = JSON.parse(storedConsent);
-                // Migrate legacy key if present.
-                saveConsent();
-                if (currentConsent.accepted) {
-                    const banner = document.getElementById("cookie-consent");
-                    if (banner) {
-                        banner.style.display = "none"; // Hide if already accepted
-                    }
-                }
             } catch (e) {
-                console.error("Error parsing stored consent:", e);
+                console.error('Error parsing stored consent:', e);
                 currentConsent = {...defaultConsent};
             }
         }
     }
-    
+
+    /**
+     * Show the cookie consent banner
+     */
+    function showConsentBanner() {
+        // Create banner element
+        const banner = document.createElement('div');
+        banner.id = 'cookie-consent-banner';
+        banner.className = 'cookie-consent-banner';
+
+        // Set banner content
+        banner.innerHTML = `
+            <div class="consent-content">
+                <div class="consent-text">
+                    <h3>Cookie Consent</h3>
+                    <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content.
+                    By clicking "Accept All", you consent to our use of cookies. Visit our
+                    <a href="cookie-policy.html">Cookie Policy</a> to learn more.</p>
+                </div>
+                <div class="consent-buttons">
+                    <button id="consent-accept-all" class="consent-button accept">Accept All</button>
+                    <button id="consent-accept-essential" class="consent-button essential">Essential Only</button>
+                    <button id="consent-customize" class="consent-button customize">Customize</button>
+                </div>
+            </div>
+        `;
+
+        // Add banner to page
+        document.body.appendChild(banner);
+
+        // Add event listeners to buttons
+        document.getElementById('consent-accept-all').addEventListener('click', () => {
+            acceptAllCookies();
+            hideBanner();
+        });
+
+        document.getElementById('consent-accept-essential').addEventListener('click', () => {
+            acceptEssentialCookies();
+            hideBanner();
+        });
+
+        document.getElementById('consent-customize').addEventListener('click', () => {
+            showPreferencesModal();
+        });
+    }
+
     /**
      * Hide the consent banner
      */
     function hideBanner() {
-        const banner = document.getElementById("cookie-consent");
+        const banner = document.getElementById('cookie-consent-banner');
         if (banner) {
-            banner.style.display = "none";
+            banner.classList.add('hidden');
+            setTimeout(() => {
+                banner.remove();
+            }, 500);
         }
     }
-    
+
     /**
      * Show the preferences modal
      */
     function showPreferencesModal() {
         // Hide banner if it exists
         hideBanner();
-        
+
         // Create modal element
         const modal = document.createElement('div');
         modal.id = 'cookie-preferences-modal';
         modal.className = 'cookie-preferences-modal';
-        
+
         // Set modal content
         modal.innerHTML = `
             <div class="preferences-content">
@@ -111,7 +127,7 @@ const FRTBCookieConsent = (function() {
                 </div>
                 <div class="preferences-body">
                     <p>Manage your cookie preferences below. Essential cookies are always enabled as they are necessary for the website to function properly.</p>
-                    
+
                     <div class="preference-item">
                         <div class="preference-info">
                             <h4>Essential Cookies</h4>
@@ -122,7 +138,7 @@ const FRTBCookieConsent = (function() {
                             <label for="essential-cookies">Always Active</label>
                         </div>
                     </div>
-                    
+
                     <div class="preference-item">
                         <div class="preference-info">
                             <h4>Functional Cookies</h4>
@@ -133,7 +149,7 @@ const FRTBCookieConsent = (function() {
                             <label for="functional-cookies">Active</label>
                         </div>
                     </div>
-                    
+
                     <div class="preference-item">
                         <div class="preference-info">
                             <h4>Analytics Cookies</h4>
@@ -150,36 +166,36 @@ const FRTBCookieConsent = (function() {
                 </div>
             </div>
         `;
-        
+
         // Add modal to page
         document.body.appendChild(modal);
-        
+
         // Add event listeners
         document.getElementById('preferences-close').addEventListener('click', () => {
             closePreferencesModal();
         });
-        
+
         document.getElementById('preferences-save').addEventListener('click', () => {
             savePreferences();
             closePreferencesModal();
         });
-        
+
         // Close modal when clicking outside
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closePreferencesModal();
             }
         });
-        
+
         // Prevent scrolling on body
         document.body.style.overflow = 'hidden';
-        
+
         // Show modal with animation
         setTimeout(() => {
             modal.classList.add('visible');
         }, 10);
     }
-    
+
     /**
      * Close the preferences modal
      */
@@ -193,14 +209,14 @@ const FRTBCookieConsent = (function() {
             }, 300);
         }
     }
-    
+
     /**
      * Save user preferences
      */
     function savePreferences() {
         const functionalConsent = document.getElementById('functional-cookies').checked;
         const analyticsConsent = document.getElementById('analytics-cookies').checked;
-        
+
         currentConsent = {
             essential: true,
             functional: functionalConsent,
@@ -208,10 +224,10 @@ const FRTBCookieConsent = (function() {
             accepted: true,
             timestamp: new Date().toISOString()
         };
-        
+
         saveConsent();
     }
-    
+
     /**
      * Accept all cookies
      */
@@ -223,10 +239,10 @@ const FRTBCookieConsent = (function() {
             accepted: true,
             timestamp: new Date().toISOString()
         };
-        
+
         saveConsent();
     }
-    
+
     /**
      * Accept only essential cookies
      */
@@ -238,47 +254,33 @@ const FRTBCookieConsent = (function() {
             accepted: true,
             timestamp: new Date().toISOString()
         };
-        
+
         saveConsent();
     }
-    
+
     /**
      * Save consent to localStorage
      */
     function saveConsent() {
-        localStorage.setItem(CONSENT_KEY, JSON.stringify(currentConsent));
+        localStorage.setItem('mird_consent', JSON.stringify(currentConsent));
     }
-    
+
     /**
      * Add event listener for cookie preferences button in footer
      */
     function addPreferenceButtonListener() {
-        const maxAttempts = 20;
-        const retryDelayMs = 250;
-        let attempts = 0;
+        setTimeout(() => {
+            const link = document.getElementById('cookie-preferences-link');
+            if (!link || link.dataset.consentBound === 'true') return;
 
-        const bindWhenAvailable = () => {
-            const preferenceLink = document.getElementById('cookie-preferences-link');
-            if (preferenceLink) {
-                if (preferenceLink.dataset.cookiePrefsBound !== 'true') {
-                    preferenceLink.addEventListener('click', (event) => {
-                        event.preventDefault();
-                        showPreferencesModal();
-                    });
-                    preferenceLink.dataset.cookiePrefsBound = 'true';
-                }
-                return;
-            }
-
-            attempts += 1;
-            if (attempts < maxAttempts) {
-                setTimeout(bindWhenAvailable, retryDelayMs);
-            }
-        };
-
-        bindWhenAvailable();
+            link.dataset.consentBound = 'true';
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                showPreferencesModal();
+            });
+        }, 500);
     }
-    
+
     // Public API
     return {
         init: init,
@@ -288,5 +290,5 @@ const FRTBCookieConsent = (function() {
 
 // Initialize cookie consent when the DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    FRTBCookieConsent.init();
+    MIRDCookieConsent.init();
 });

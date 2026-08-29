@@ -1,124 +1,143 @@
-// Countdown Timer Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Set the countdown date (3 days from now)
-    const countdownDate = new Date();
-    countdownDate.setDate(countdownDate.getDate() + 3);
-    
-    // Update countdown every second
+document.addEventListener("DOMContentLoaded", () => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const menuButton = document.querySelector(".menu-toggle");
+    const navigation = document.getElementById("primary-nav");
+
+    function closeMenu() {
+        if (!menuButton || !navigation) return;
+        menuButton.setAttribute("aria-expanded", "false");
+        navigation.classList.remove("is-open");
+        document.body.classList.remove("nav-open");
+    }
+
+    if (menuButton && navigation) {
+        menuButton.addEventListener("click", () => {
+            const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+            menuButton.setAttribute("aria-expanded", String(!isOpen));
+            navigation.classList.toggle("is-open", !isOpen);
+            document.body.classList.toggle("nav-open", !isOpen);
+        });
+
+        navigation.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 760) closeMenu();
+        });
+    }
+
+    document.querySelectorAll(".accordion-trigger").forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+            const panelId = trigger.getAttribute("aria-controls");
+            const panel = panelId ? document.getElementById(panelId) : null;
+            if (!panel) return;
+
+            const isOpen = trigger.getAttribute("aria-expanded") === "true";
+            trigger.setAttribute("aria-expanded", String(!isOpen));
+            panel.hidden = isOpen;
+
+            const icon = trigger.querySelector(".toggle-icon");
+            if (icon) icon.textContent = isOpen ? "+" : "-";
+        });
+    });
+
+    const revealTargets = document.querySelectorAll(".reveal, .reveal-on-load");
+    const showAll = () => revealTargets.forEach((target) => target.classList.add("is-visible"));
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+        showAll();
+    } else {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealTargets.forEach((target) => observer.observe(target));
+        window.setTimeout(() => {
+            document.querySelectorAll(".reveal-on-load").forEach((target) => target.classList.add("is-visible"));
+        }, 100);
+    }
+
+    const preview = document.querySelector(".video-preview");
+    if (preview) {
+        preview.addEventListener("click", () => {
+            const previewUrl = preview.dataset.previewUrl;
+            if (previewUrl) window.open(previewUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+
+    const couponButton = document.querySelector("[data-copy-coupon]");
+    if (couponButton) {
+        couponButton.addEventListener("click", async () => {
+            const coupon = couponButton.dataset.copyCoupon || "";
+            const code = couponButton.querySelector("code");
+            const original = code ? code.textContent : coupon;
+
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(coupon);
+                } else {
+                    const input = document.createElement("textarea");
+                    input.value = coupon;
+                    input.setAttribute("readonly", "");
+                    input.style.position = "fixed";
+                    input.style.opacity = "0";
+                    document.body.appendChild(input);
+                    input.select();
+                    document.execCommand("copy");
+                    input.remove();
+                }
+
+                if (code) code.textContent = "Copied to clipboard";
+                window.setTimeout(() => {
+                    if (code) code.textContent = original;
+                }, 1600);
+            } catch (error) {
+                if (code) code.textContent = "Select and copy: " + coupon;
+            }
+        });
+    }
+
+    const offerDeadline = document.body.dataset.offerDeadline || "2026-09-01T03:59:59Z";
+    const countdownTarget = new Date(offerDeadline).getTime();
+    const countdownValues = {
+        days: document.querySelector('[data-countdown="days"]'),
+        hours: document.querySelector('[data-countdown="hours"]'),
+        minutes: document.querySelector('[data-countdown="minutes"]'),
+        seconds: document.querySelector('[data-countdown="seconds"]')
+    };
+    const countdownSummary = document.querySelector("[data-countdown-summary]");
+
     function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = countdownDate - now;
-        
-        // Time calculations
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        // Update all countdown displays
-        document.getElementById("days").textContent = days;
-        document.getElementById("hours").textContent = hours;
-        document.getElementById("minutes").textContent = minutes;
-        document.getElementById("seconds").textContent = seconds;
-        
-        document.getElementById("final-timer").textContent = `${days} days, ${hours} hours, ${minutes} minutes`;
-        
-        // If countdown is finished
-        if (distance < 0) {
-            clearInterval(countdownInterval);
-            document.getElementById("countdown").innerHTML = "EXPIRED";
+        const distance = Math.max(0, countdownTarget - Date.now());
+        const days = Math.floor(distance / 86400000);
+        const hours = Math.floor((distance % 86400000) / 3600000);
+        const minutes = Math.floor((distance % 3600000) / 60000);
+        const seconds = Math.floor((distance % 60000) / 1000);
+
+        if (countdownValues.days) countdownValues.days.textContent = String(days);
+        if (countdownValues.hours) countdownValues.hours.textContent = String(hours).padStart(2, "0");
+        if (countdownValues.minutes) countdownValues.minutes.textContent = String(minutes).padStart(2, "0");
+        if (countdownValues.seconds) countdownValues.seconds.textContent = String(seconds).padStart(2, "0");
+
+        if (countdownSummary) {
+            countdownSummary.textContent = distance > 0
+                ? `Offer ends in ${days}d ${hours}h ${minutes}m`
+                : "August offer has ended";
         }
+
+        return distance;
     }
-    
-    // Initial call
-    updateCountdown();
-    
-    // Update every second
-    const countdownInterval = setInterval(updateCountdown, 1000);
-    
-    // Module accordion functionality
-    const moduleHeaders = document.querySelectorAll('.module-header');
-    moduleHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const content = this.nextElementSibling;
-            const icon = this.querySelector('.toggle-icon i');
-            
-            // Toggle content visibility
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-                icon.classList.remove('fa-minus');
-                icon.classList.add('fa-plus');
-            } else {
-                content.style.display = 'block';
-                icon.classList.remove('fa-plus');
-                icon.classList.add('fa-minus');
-            }
-        });
-    });
-    
-    // FAQ accordion functionality
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-            const answer = this.nextElementSibling;
-            const icon = this.querySelector('.toggle-icon i');
-            
-            // Toggle answer visibility
-            if (answer.style.display === 'block') {
-                answer.style.display = 'none';
-                icon.classList.remove('fa-minus');
-                icon.classList.add('fa-plus');
-            } else {
-                answer.style.display = 'block';
-                icon.classList.remove('fa-plus');
-                icon.classList.add('fa-minus');
-            }
-        });
-    });
-    
-    // Coupon code copy functionality
-    const couponCode = document.querySelector('.code');
-    if (couponCode) {
-        couponCode.addEventListener('click', function() {
-            const tempInput = document.createElement('input');
-            tempInput.value = this.textContent;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            
-            // Show copied message
-            const originalText = this.textContent;
-            this.textContent = 'Copied!';
-            setTimeout(() => {
-                this.textContent = originalText;
-            }, 1500);
-        });
-    }
-    
-    // Remaining seats counter (simulated)
-    const seatsElement = document.querySelector('.seats-limited .highlight');
-    if (seatsElement) {
-        // Randomly decrease seats every few minutes to create urgency
-        const decreaseSeats = () => {
-            const currentSeats = parseInt(seatsElement.textContent);
-            if (currentSeats > 1) {
-                seatsElement.textContent = (currentSeats - 1).toString();
-            }
-        };
-        
-        // Set random intervals to decrease seats
-        setTimeout(decreaseSeats, 180000); // 3 minutes
-        setTimeout(decreaseSeats, 420000); // 7 minutes
-    }
-    
-    // Video preview click handler
-    const videoPreview = document.querySelector('.video-preview');
-    if (videoPreview) {
-        videoPreview.addEventListener('click', function() {
-            // In a real implementation, this would open a video modal
-            // For this demo, we'll just redirect to the Udemy course preview
-            window.open('https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_AUG_2026', '_blank');
-        });
+
+    if (updateCountdown() > 0) {
+        const countdownInterval = window.setInterval(() => {
+            if (updateCountdown() === 0) window.clearInterval(countdownInterval);
+        }, 1000);
     }
 });
