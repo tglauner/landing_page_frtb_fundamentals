@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    const offerDeadline = document.body.dataset.offerDeadline || "2026-09-01T03:59:59Z";
+    const offerDeadline = document.body.dataset.offerDeadline || "2026-10-01T03:59:59Z";
     const countdownTarget = new Date(offerDeadline).getTime();
     const countdownValues = {
         days: document.querySelector('[data-countdown="days"]'),
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (countdownSummary) {
             countdownSummary.textContent = distance > 0
                 ? `Offer ends in ${days}d ${hours}h ${minutes}m`
-                : "August offer has ended";
+                : "September offer has ended";
         }
 
         return distance;
