@@ -58,7 +58,7 @@
 - Discount details: "25% OFF - Only for the next [countdown timer]"
 - Original price ($199) with strikethrough
 - Discounted price ($149.99) highlighted
-- Exclusive coupon code: "FRTB25_SEP_2026"
+- Exclusive coupon code: "25OFF_TG_OCT_2026"
 - Urgency messaging: "Limited seats available at this price"
 - Primary CTA button
 

@@ -21,7 +21,7 @@ const EURedirect = (function() {
     ];
     
     // Default Udemy URL with coupon
-    const udemyURL = "https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=FRTB25_SEP_2026";
+    const udemyURL = "https://www.udemy.com/course/fundamental-review-of-the-trading-book/?couponCode=25OFF_TG_OCT_2026";
     
     /**
      * Check if the user is in the EU based on their IP address
@@ -30,7 +30,15 @@ const EURedirect = (function() {
     async function isEUVisitor() {
         try {
             // Use a free geolocation API to get country information
-            const response = await fetch('https://ipapi.co/json/');
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 3000);
+            let response;
+            try {
+                response = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+            } finally {
+                clearTimeout(timeout);
+            }
+            if (!response.ok) throw new Error('Location lookup failed');
             const data = await response.json();
             
             // Check if the country code is in the EU list
@@ -48,7 +56,7 @@ const EURedirect = (function() {
      * @param {Event} event - Click event
      */
     async function handleEnrollClick(event) {
-        // Prevent the default link behavior
+        if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
         
         // Show loading state
@@ -84,19 +92,8 @@ const EURedirect = (function() {
      * Initialize the EU redirect functionality
      */
     function init() {
-        // Find all enrollment buttons
-        const enrollButtons = document.querySelectorAll('.primary-cta, .cta-button, a[href*="#pricing"]');
-        
-        // Add click event listeners to all enrollment buttons
-        enrollButtons.forEach(button => {
-            button.addEventListener('click', handleEnrollClick);
-        });
-        
-        // Update direct links to Udemy in the HTML
-        document.querySelectorAll('a[href*="udemy.com"]').forEach(link => {
-            const originalHref = link.getAttribute('href');
-            link.setAttribute('data-udemy-url', originalHref);
-            link.setAttribute('href', '#');
+        // Coupon links enroll; preview and on-page links retain their own destinations.
+        document.querySelectorAll('a[href*="udemy.com/course/"][href*="couponCode="]').forEach(link => {
             link.addEventListener('click', handleEnrollClick);
         });
     }

@@ -23,6 +23,13 @@ const MIRDCookieConsent = (function() {
     function init() {
         // Check for existing consent
         checkExistingConsent();
+        publishAnalyticsConsent();
+        window.addEventListener('storage', (event) => {
+            if (event.key !== 'mird_consent' && event.key !== null) return;
+            currentConsent = {...defaultConsent};
+            checkExistingConsent();
+            publishAnalyticsConsent();
+        });
 
         // If no consent has been given yet, show the banner
         if (!currentConsent.accepted) {
@@ -64,7 +71,7 @@ const MIRDCookieConsent = (function() {
                     <h3>Cookie Consent</h3>
                     <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content.
                     By clicking "Accept All", you consent to our use of cookies. Visit our
-                    <a href="cookie-policy.html">Cookie Policy</a> to learn more.</p>
+                    <a href="/frtb_fundamentals/cookie-policy.html">Cookie Policy</a> to learn more.</p>
                 </div>
                 <div class="consent-buttons">
                     <button id="consent-accept-all" class="consent-button accept">Accept All</button>
@@ -110,6 +117,8 @@ const MIRDCookieConsent = (function() {
      * Show the preferences modal
      */
     function showPreferencesModal() {
+        currentConsent = {...defaultConsent};
+        checkExistingConsent();
         // Hide banner if it exists
         hideBanner();
 
@@ -261,24 +270,33 @@ const MIRDCookieConsent = (function() {
     /**
      * Save consent to localStorage
      */
+    function publishAnalyticsConsent() {
+        window.tgAnalyticsConsent = currentConsent.analytics === true;
+        window.dispatchEvent(new CustomEvent('tg:analytics-consent', {
+            detail: { analytics: window.tgAnalyticsConsent }
+        }));
+    }
+
     function saveConsent() {
         localStorage.setItem('mird_consent', JSON.stringify(currentConsent));
+        publishAnalyticsConsent();
     }
 
     /**
      * Add event listener for cookie preferences button in footer
      */
     function addPreferenceButtonListener() {
-        setTimeout(() => {
+        function bind() {
             const link = document.getElementById('cookie-preferences-link');
             if (!link || link.dataset.consentBound === 'true') return;
-
             link.dataset.consentBound = 'true';
             link.addEventListener('click', event => {
                 event.preventDefault();
                 showPreferencesModal();
             });
-        }, 500);
+        }
+        bind();
+        setTimeout(bind, 500);
     }
 
     // Public API
